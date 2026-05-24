@@ -1,0 +1,45 @@
+# ── DreamScape AI — Python Dependencies ───────────────────────────────────────
+# Install: pip install -r requirements.txt
+# GPU:     pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+
+# ── Web Framework ──────────────────────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# ── AI / ML ────────────────────────────────────────────────────────────────────
+torch>=2.2.0
+torchvision>=0.17.0
+torchaudio>=2.2.0
+transformers==4.41.0
+diffusers==0.27.2
+accelerate==0.30.0
+safetensors==0.4.3
+sentencepiece==0.2.0
+
+# Optional: xFormers for memory-efficient attention (CUDA only)
+# xformers==0.0.26
+
+# Optional: Meta MusicGen
+# audiocraft @ git+https://github.com/facebookresearch/audiocraft.git
+
+# ── Video / Audio ──────────────────────────────────────────────────────────────
+moviepy==1.0.3
+imageio==2.34.1
+imageio-ffmpeg==0.5.1
+Pillow==10.3.0
+
+# ── Audio ──────────────────────────────────────────────────────────────────────
+torchaudio>=2.2.0   # already listed above, needed for MusicGen save
+
+# ── OpenAI (optional GPT enrichment) ──────────────────────────────────────────
+openai==1.30.1
+
+# ── Utilities ──────────────────────────────────────────────────────────────────
+python-dotenv==1.0.1
+numpy==1.26.4
+requests==2.32.2
+aiofiles==23.2.1
+httpx==0.27.0
