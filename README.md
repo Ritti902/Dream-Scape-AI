@@ -1,74 +1,95 @@
 # DreamScape AI
 
-DreamScape AI turns a text prompt into a generated visual, soundtrack, and short cinematic output. The project combines a React frontend with a FastAPI backend and AI generation modules for emotion analysis, prompt building, image creation, music generation, and video assembly.
+DreamScape AI turns a short text prompt into a cinematic AI output. The app analyzes the emotion in the prompt, expands it into a richer creative direction, generates an image, adds music, and assembles a short dream-like video.
 
-## Stack
+## What It Includes
+
+- A React + Vite frontend for prompt entry, generation flow, and result viewing
+- A FastAPI backend with sync and async generation endpoints
+- AI pipeline modules for emotion detection, prompt building, image generation, music generation, and video creation
+- Static serving for generated output files
+
+## Tech Stack
 
 - Frontend: React, Vite, Axios, React Router
 - Backend: FastAPI, Uvicorn, Pydantic
 - AI and media: PyTorch, Diffusers, Transformers, MoviePy
 
-## Project Layout
+## Project Structure
 
 ```text
 Dream-Scape-AI/
 |-- backend/
 |   |-- main.py
 |   |-- routes.py
+|   |-- schemas.py
 |   `-- src/ai_core/
 |-- frontend/
 |   |-- src/
-|   `-- package.json
+|   |-- package.json
+|   `-- vite.config.js
 |-- requirements.txt
 `-- README.md
 ```
 
-## Features
+## How The Flow Works
 
-- Analyze prompt emotion and themes
-- Suggest an art style based on emotion
-- Generate image, music, and video outputs
-- Expose synchronous and async generation endpoints
-- Serve generated files from the backend
+1. The user enters a text prompt in the frontend.
+2. The backend detects emotion and themes from the text.
+3. The prompt builder expands that input into a generation-ready creative prompt.
+4. The pipeline generates image, music, and video assets.
+5. The frontend displays the generated results and links to output files.
 
-## Local Setup
+## Quick Start
 
-### Backend
+### Prerequisites
 
-1. Create and activate a Python virtual environment.
-2. Install dependencies:
+- Python 3.10+
+- Node.js 18+
+- A machine capable of running the listed AI dependencies
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Ritti902/Dream-Scape-AI.git
+cd Dream-Scape-AI
+```
+
+### 2. Install backend dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Start the API from `backend/`:
+### 3. Start the backend
+
+Run this from the `backend/` folder:
 
 ```bash
 python main.py
 ```
 
-The backend runs on `http://127.0.0.1:8000` by default.
+The backend defaults to `http://127.0.0.1:8000`.
 
-### Frontend
+### 4. Install frontend dependencies
 
-1. Install frontend dependencies from `frontend/`:
+Run this from the `frontend/` folder:
 
 ```bash
 npm install
 ```
 
-2. Start the Vite dev server:
+### 5. Start the frontend
 
 ```bash
 npm run dev
 ```
 
-The frontend expects the API at `http://127.0.0.1:8000/api/v1`.
+The frontend is configured to call `http://127.0.0.1:8000/api/v1`.
 
 ## Environment Variables
 
-These are the main backend settings used by the project:
+Main backend settings:
 
 ```env
 OPENAI_API_KEY=
@@ -84,20 +105,26 @@ VIDEO_DURATION=8
 OUTPUT_DIR=outputs
 ```
 
-## API Endpoints
+## API Routes
 
-- `GET /` for service info
-- `GET /api/v1/health` for backend health
-- `POST /api/v1/analyze` for emotion analysis
-- `POST /api/v1/generate` for direct generation
-- `POST /api/v1/generate/async` for queued generation
-- `GET /api/v1/jobs/{job_id}` for async job status
+- `GET /` returns basic service metadata
+- `GET /api/v1/health` returns backend health and model availability
+- `POST /api/v1/analyze` analyzes prompt emotion without generating assets
+- `POST /api/v1/generate` runs the full generation pipeline
+- `POST /api/v1/generate/async` starts generation in the background
+- `GET /api/v1/jobs/{job_id}` checks async generation status
+- `GET /outputs/{folder}/{filename}` serves generated files
+
+## Output Files
+
+- Generated media is written under `backend/outputs/`
+- Output audio, image, and video artifacts are intentionally ignored by git
 
 ## Notes
 
-- Generated media is written under `backend/outputs/`.
-- Heavy AI dependencies may require a capable GPU for practical runtimes.
-- The repo includes the frontend lockfile for reproducible installs.
+- First-run model downloads can be large and slow
+- Practical generation performance will be much better with a GPU
+- The frontend lockfile is committed for reproducible installs
 
 ## License
 
